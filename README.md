@@ -1,46 +1,150 @@
-# Нахало Работы с приложением "Создать рэакциюлы"
+## Задание
 
-Этот проект выл Нахат с [Создать рекцию прилогового](https://github.com/facebook/create-react-app).
+  
 
-## Доступные сценарии
+Необходимо создать простое веб-приложение, которое позволяет пользователям искать репозитории на GitHub по имени пользователя и отображать информацию о найденных репозиториях. Используйте GitHub API для получения данных: [GitHub Repositories API](https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user).
 
-В каталоге Попроэкта Можно запостит
+  
+  
 
-### `нпм старт`
+Дополнительным плюсом будет: Финальный билд приложения должен быть запускаться из __Docker контейнера__ (хотябы с минимальной конфигурацией)
 
-Запускает Приложенье в Режиме Разработки.\
-Открытый [http://localhost:3000](http://localhost:3000) что ты попросишь его в Браузере.
+  
 
-Страница почитает эту вещь в этиме.\
-Вы так убилили в корсе в Конесоли.
+__Функционал__
 
-### `тэт нпм`
+  
 
-Запускает того, кто был в Régime yntheraktiwnyх chasovese.\
-Смотрите раздел о [ходовы тесты](https://facebook.github.io/create-react-app/docs/running-tests) dl€ polluchchy€ dopolni€ ћинфоэрмаци.
+- Должно быть текстовое поле куда можно ввести имя пользователя. Триггером к поиску является ввод пользовательского текста. Запросы к api github не должны быть избыточными
 
-### `нпм запоскаут сборку`
+- После получения данных, должны появляться карточки с информацией о репозиториях пользователя, информация включает: 
+-- Название репозитория
+-- Описание (если доступно)
+-- Ссылку на репозиторий
+--Количество звёзд (stars)
+--Дату последнего обновления
 
-Создательство приложенское прохождение `страйтль` папка.\
-Рекция Оны Правило Обьединет в пройзвестиях и оптимирурурурает сборку достояний.
+- В момент ожидания ответа от github api должен быть индикатор загрузки
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Необходимо реализовать пагинацию с шагом 20, триггером к выполнению запроса за следующей страницей должна стать прокрутка экрана вниз, то есть необходимо реализовать механизм бесконечной прокрутки
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Если пользователь вводит некорректное имя пользователя или если возникают ошибки при запросе к API, приложение должно отображать соответствующее сообщение об ошибке понятное человеку.
 
-### `npm run eject`
+  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+__Замечания__
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+-  __Обязательно__ использование React, Redux/MobX.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-  __Желательно__ Typescript, Redux-toolkit
 
-## Learn More
+- Использование сторонних библиотек будет плюсом только в случае если это оправданно и вы сможете объяснить причину выбора. Показав свои знания в грамотном применении сторонних готовых решений, вы имеете шанс повысить свою профессиональную привлекательность для нас.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Пишите код так, как бы вы его писали в работе &mdash; внутренности задания будут оцениваться даже тщательней, чем внешнее соответствие заданию. Код должен быть организован так, чтобы его можно было заново использовать.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Помните про обработку ошибок!
+
+- Верстка может быть самая простая, однако она не должна ломаться при разрешениях от 320px до 1920px. Визуализацию и украшение делайте на ваш вкус. Мы не против использования [tailwind css](https://tailwindcss.com/) или похожего UI фреймворк, но только для UI представления (нельзя использовать JS код для решения задачи, но можно использовать для оформительских эффектов (анимации и тому подобное))!
+
+  __Старт проекта и его реализация__
+
+  Сначала создадим новый проект с использованием Create React App и TypeScript:
+  ```
+  npx create-react-app github-repos --template typescript
+  cd github-repos
+  ```
+  Установим необходимые зависимости:
+```
+  npm install @reduxjs/toolkit react-redux axios tailwindcss @heroicons/react
+```
+После создания проекта, установим Tailwind CSS:
+```
+npm install -D tailwindcss postcss autoprefixer
+```
+Создадим базовую структуру проекта:
+```
+npx tailwindcss init
+```
+__Структура проекта должна быть следующей:__
+github-repos
+├──node_modules /
+├──public /
+├──src /
+│ ├──components /
+| | ├──ErrorMessage.css
+| | ├──ErrorMessage.jsx
+| | ├──ErrorMessage.tsx
+| | ├──LoadingSpinner.css
+| | ├──LoadingSpinner.jsx
+| | ├──LoadingSpinner.tsx
+| | ├──RepoCard.css
+| | ├──RepoCard.jsx
+| | ├──RepoCard.tsx
+| | ├──SearchBar.css
+| | ├──SearchBar.jsx
+| | ├──SearchBar.tsx
+| | └──SearchPage.tsx
+│ ├──hooks/
+| | ├──index.ts
+| | ├──useAppDispatch.ts
+| | └──useAppSelector.ts
+│ ├──store /
+| | ├──githubSlice.ts
+| | ├──searchSlice.ts
+| | └──store.ts
+│ ├──types/
+| | ├──github.ts
+| | └──types.ts
+│ ├──App.tsx
+│ ├──App.jsx
+│ ├──App.test.tsx
+│ ├──App.tsx
+│ ├──index.css
+│ ├──index.tsx
+│ ├──react-app-env.d.ts
+│ ├──reportWebVitals.ts
+│ ├──index.tsx
+│ └──setupTests.ts
+```
+В данной структуре указыны все необходимые файлы и папки для проекта.
+
+После создания структуры проекта, можно приступать к написанию кода.
+
+__Необходимые команды в процессе разработкт:__
+
+Для того чтобы запустить проект, нужно ввести команду:
+```
+npm start
+```
+
+Для тестирования проекта, нужно ввести команду:
+```
+npm test
+```
+
+Для сборки проекта, нужно ввести команду:
+```
+npm run build
+```
+
+Для запуска проекта в Docker контейнере, нужно ввести команду:
+```
+docker build -t github-repos .
+docker run -p 3000:3000 github-repos
+```
+
+Для остановки проекта в Docker контейнере, нужно ввести команду:
+```
+docker stop github-repos
+```
+
+Для удаления Docker контейнера, нужно ввести команду:
+```
+docker rm github-repos
+```
+Тест в ПО: VirtualBOX, при помощи запуска виртуальной машины на базе android 9.0
+Тест в среде различных браузеров, на движке оперы  (через: открыть при помощи... Opera, Vivaldi, Coast)
+
+---
