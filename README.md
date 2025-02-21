@@ -1,28 +1,28 @@
-# Getting Started with Create React App
+# Нахало Работы с приложением "Создать рэакциюлы"
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Этот проект выл Нахат с [Создать рекцию прилогового](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Доступные сценарии
 
-In the project directory, you can run:
+В каталоге Попроэкта Можно запостит
 
-### `npm start`
+### `нпм старт`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Запускает Приложенье в Режиме Разработки.\
+Открытый [http://localhost:3000](http://localhost:3000) что ты попросишь его в Браузере.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Страница почитает эту вещь в этиме.\
+Вы так убилили в корсе в Конесоли.
 
-### `npm test`
+### `тэт нпм`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Запускает того, кто был в Régime yntheraktiwnyх chasovese.\
+Смотрите раздел о [ходовы тесты](https://facebook.github.io/create-react-app/docs/running-tests) dl€ polluchchy€ dopolni€ ћинфоэрмаци.
 
-### `npm run build`
+### `нпм запоскаут сборку`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Создательство приложенское прохождение `страйтль` папка.\
+Рекция Оны Правило Обьединет в пройзвестиях и оптимирурурурает сборку достояний.
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
