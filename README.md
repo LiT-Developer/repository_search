@@ -55,14 +55,17 @@ __Замечания__
   npx create-react-app github-repos --template typescript
   cd github-repos
   ```
+  
   Установим необходимые зависимости:
 ```
   npm install @reduxjs/toolkit react-redux axios tailwindcss @heroicons/react
 ```
+
 После создания проекта, установим Tailwind CSS:
 ```
 npm install -D tailwindcss postcss autoprefixer
 ```
+
 Создадим базовую структуру проекта:
 ```
 npx tailwindcss init
@@ -115,35 +118,42 @@ github-repos
 __Необходимые команды в процессе разработкт:__
 
 Для того чтобы запустить проект, нужно ввести команду:
+
 ```
 npm start
 ```
 
 Для тестирования проекта, нужно ввести команду:
+
 ```
 npm test
 ```
 
 Для сборки проекта, нужно ввести команду:
+
 ```
 npm run build
 ```
 
 Для запуска проекта в Docker контейнере, нужно ввести команду:
+
 ```
 docker build -t github-repos .
 docker run -p 3000:3000 github-repos
 ```
 
 Для остановки проекта в Docker контейнере, нужно ввести команду:
+
 ```
 docker stop github-repos
 ```
 
 Для удаления Docker контейнера, нужно ввести команду:
+
 ```
 docker rm github-repos
 ```
+
 Тест в ПО: VirtualBOX, при помощи запуска виртуальной машины на базе android 9.0
 Тест в среде различных браузеров, на движке оперы  (через: открыть при помощи... Opera, Vivaldi, Coast)
 
